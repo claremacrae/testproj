@@ -12,9 +12,15 @@ FetchContent_MakeAvailable(doctest)
 enable_testing()
 
 set(PROJ_SRC util.cpp util.h)
+# Put code that is used by both testproj and testproj_tests
+# in to a library. This way, these files will only be compiled once,
+# but linked in to both executables.
+add_library(testproj_lib ${PROJ_SRC})
+
 set(TEST_SRC tests/test.cpp tests/util.test.cpp)
 
-add_executable(testproj main.cpp ${PROJ_SRC})
+add_executable(testproj main.cpp)
+target_link_libraries(testproj testproj_lib)
 
-add_executable(testproj_tests ${TEST_SRC} ${PROJ_SRC})
-target_link_libraries(testproj_tests doctest::doctest)
+add_executable(testproj_tests ${TEST_SRC})
+target_link_libraries(testproj_tests testproj_lib doctest::doctest)
