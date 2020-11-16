@@ -19,6 +19,4 @@ add_library(testproj_lib util.cpp util.h)
 add_executable(testproj main.cpp)
 target_link_libraries(testproj testproj_lib)
 
-set(TEST_SRC tests/test.cpp tests/util.test.cpp)
-add_executable(testproj_tests ${TEST_SRC})
-target_link_libraries(testproj_tests testproj_lib doctest::doctest)
+add_subdirectory(tests)
