@@ -14,7 +14,7 @@ enable_testing()
 # Put code that is used by both testproj and testproj_tests
 # in to a library. This way, these files will only be compiled once,
 # but linked in to both executables.
-add_library(testproj_lib util.cpp util.h)
+add_library(testproj_lib testproj_lib/util.cpp testproj_lib/util.h)
 
 add_executable(testproj main.cpp)
 target_link_libraries(testproj testproj_lib)
